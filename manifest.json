@@ -3,7 +3,12 @@
   "name": "JSON Fetcher Extension",
   "version": "1.0",
   "description": "Fetch JSON from a website",
-  "permissions": ["activeTab", "http://*/*", "https://*/*"],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab",
+    "*://*/*"  // Allow all websites
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
