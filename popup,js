@@ -1,0 +1,19 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const fetchButton = document.getElementById("fetchButton");
+  const resultDiv = document.getElementById("result");
+
+  fetchButton.addEventListener("click", () => {
+    // Replace the URL with the actual JSON URL you want to fetch.
+    const jsonUrl = "https://example.com/api/data.json";
+
+    fetch(jsonUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // Process and display the JSON data.
+        resultDiv.textContent = JSON.stringify(data, null, 2);
+      })
+      .catch((error) => {
+        resultDiv.textContent = "Error fetching JSON: " + error.message;
+      });
+  });
+});
