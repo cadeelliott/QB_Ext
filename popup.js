@@ -1,10 +1,23 @@
-document.getElementById('startButton').addEventListener('click', () => {
-  chrome.scripting.executeScript({
-    target: { tabId: chrome.tabs.getCurrent().id },
-    function: startMonitoring
-  });
-});
+// popup.js
+document.addEventListener("DOMContentLoaded", function () {
+  const duplicateButton = document.getElementById("duplicateButton");
 
-function startMonitoring() {
-  chrome.runtime.sendMessage({ action: 'startMonitoring' });
-}
+  duplicateButton.addEventListener("click", function () {
+    // Send a message to content.js to trigger the duplication
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        function: duplicateElements,
+      });
+    });
+  });
+
+  function duplicateElements() {
+    const elementsToDuplicate = document.querySelectorAll(".cell.col-1.left.wrap");
+
+    elementsToDuplicate.forEach((element) => {
+      const clone = element.cloneNode(true);
+      element.parentNode.insertBefore(clone, element.nextSibling);
+    });
+  }
+});
