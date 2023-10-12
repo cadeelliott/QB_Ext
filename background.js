@@ -16,6 +16,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 });
 
 function duplicateElements() {
+  console.log('inside duplicateElements');
   const elementsToDuplicate = document.querySelectorAll(".cell.col-1.left.wrap");
 
   elementsToDuplicate.forEach((element) => {
